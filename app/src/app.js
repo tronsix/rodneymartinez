@@ -1,19 +1,11 @@
 import React from 'react';
 
-import Button from '@material/react-button';
-import Nav from './components/nav';
-
 function App() {
   return (
     <div>
-      <Nav />
-      <Button
-          raised
-          className='button-alternate'
-          onClick={() => console.log('clicked!')}
-        >
-          Click Me!
-        </Button>
+      <button class="mdc-button">
+        <span class="mdc-button__label">Button</span>
+      </button>
     </div>
   );
 }
