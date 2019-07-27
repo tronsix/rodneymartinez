@@ -1,9 +1,10 @@
+//theme styles
+@import '/theme.scss';
+
 // web
 @import '@material/theme/mdc-theme';
 @import '@material/typography/mdc-typography';
 @import "@material/button/mdc-button";
 
-// mixins
-
 //component styles
-@import 'components.scss'
+@import '/components.scss';

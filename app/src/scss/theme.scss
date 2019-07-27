@@ -1,0 +1,76 @@
+
+// Theme colors
+$mdc-theme-primary: #EE2C33;
+$mdc-theme-secondary: #300000;
+$mdc-theme-on-primary: #000000;
+$mdc-theme-on-secondary: #FFFFFF;
+
+// ========== Typography ========== //
+
+$mdc-typography-font-family: unquote("Poppins, sans-serif");
+
+// *** headline *** //
+
+$mdc-typography-styles-headline1: (
+    font-family: unquote("Playfair Display, serif"),
+    font-weight: 900,
+);
+$mdc-typography-styles-headline2: (
+    font-family: unquote("Playfair Display, serif"),
+    font-weight: 700,
+);
+$mdc-typography-styles-headline3: (
+    font-family: unquote("Playfair Display, serif"),
+    font-weight: 700,
+);
+$mdc-typography-styles-headline4: (
+    font-family: unquote("Playfair Display, serif"),
+    font-weight: 700,
+);
+$mdc-typography-styles-headline5: (
+    font-family: unquote("Playfair Display, serif"),
+    font-weight: 700,
+);
+$mdc-typography-styles-headline6: (
+    font-family: unquote("Playfair Display, serif"),
+    font-weight: 700,
+);
+
+// *** subtitle *** //
+
+$mdc-typography-styles-subtitle1: (
+  font-size: 18px,
+  font-weight: 400,
+  text-transform: uppercase,
+);
+
+
+// *** body *** //
+
+$mdc-typography-styles-body1: (
+  font-size: 16px,
+  font-weight: 400,
+);
+
+// *** caption *** //
+
+$mdc-typography-styles-caption: (
+  font-size: 10px,
+  font-weight: 400,
+);
+
+
+// *** button *** //
+
+$mdc-typography-styles-button: (
+  font-size: 14px,
+  font-weight: 700,
+);
+
+// *** overline *** //
+
+$mdc-typography-styles-overline: (
+  font-size: 12px,
+  font-weight: 400,
+  text-transform: uppercase,
+);
