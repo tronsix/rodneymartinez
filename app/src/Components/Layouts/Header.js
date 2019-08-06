@@ -1,12 +1,12 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   AppBar,
   Toolbar,
   Grid,
-  Container,
   Typography,
-  Link,
+  Link
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -22,6 +22,15 @@ const useStyles = makeStyles(theme => ({
   navLink: {
     marginRight: theme.spacing(2),
     fontWeight: 700,
+    textDecoration: 'none',
+    '&.active': {
+      boxShadow: '0 3px 0 0 red'
+    },
+    '&:hover': {
+      color: 'grey',
+      textDecoration: 'none',
+      boxShadow: '0 3px 0 0 red'
+    },
   },
 }));
 
@@ -31,28 +40,26 @@ export default function NavBar() {
   return (
     <div className={classes.root}>
       <AppBar elevation="0" position="static" color="background">
-        <Toolbar>
-          <Container>
-            <Grid
-              container
-              spacing={4}
-              justify="center"
-              alignItems="center"
-            >
-              <Grid item xs>
-                <Typography color="secondary" variant="h6" className={classes.title}>
-                  Rodney Martinez
-                </Typography>
-              </Grid>
-              <Grid item xs>
-                <div className={classes.nav}>
-                  <Link color="secondary" className={classes.navLink}>Work</Link>
-                  <Link color="secondary" className={classes.navLink}>About</Link>
-                  <Link color="secondary" className={classes.navLink}>Contact</Link>
-                </div>
-              </Grid>
+        <Toolbar disableGutters={true}>
+          <Grid
+            container
+            spacing={0}
+            justify="center"
+            alignItems="center"
+          >
+            <Grid item xs>
+              <Typography color="secondary" variant="h6" className={classes.title}>
+                Rodney Martinez
+              </Typography>
             </Grid>
-          </Container>
+            <Grid item xs>
+              <div className={classes.nav}>
+                <Link component={NavLink} className={classes.navLink} color="secondary" exact to="/">Work</Link>
+                <Link component={NavLink} className={classes.navLink} color="secondary" to="/about">About</Link>
+                <Link component={NavLink} className={classes.navLink} color="secondary" to="/contact">Contact</Link>
+              </div>
+            </Grid>
+          </Grid>
         </Toolbar>
       </AppBar>
     </div>
