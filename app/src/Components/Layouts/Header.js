@@ -38,6 +38,7 @@ export default function NavBar() {
   const classes = useStyles();
 
   return (
+
     <div className={classes.root}>
       <AppBar elevation="0" position="static" color="background">
         <Toolbar disableGutters={true}>
@@ -63,5 +64,6 @@ export default function NavBar() {
         </Toolbar>
       </AppBar>
     </div>
+    
   );
 }
