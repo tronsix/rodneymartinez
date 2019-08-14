@@ -1,95 +1,96 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, TextField } from '@material-ui/core';
+import { Container, Grid, TextField, Button } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
-    container: {
+    root: {
+    },
+    form: {
         display: 'flex',
         flexWrap: 'wrap',
+        marginTop: '72px',
     },
     textField: {
-        marginLeft: theme.spacing(1),
-        marginRight: theme.spacing(1),
+        '& fieldset': {
+            borderRadius: '0',
+        },
     },
-    dense: {
-        marginTop: theme.spacing(2),
-    },
-    menu: {
-        width: 200,
+    button: {
+        borderRadius: '0',
+        border: '2px solid',
+        '&:hover':{
+            border: '2px solid',
+        }
     },
 }));
 
-export default function Contact() {
-
+export const Contact = () => {
     const classes = useStyles();
-    const [values, setValues] = React.useState({
-        name: 'Cat in the Hat',
-        age: '',
-        multiline: 'Controlled',
-        currency: 'EUR',
-    });
-
-    const handleChange = name => event => {
-        setValues({ ...values, [name]: event.target.value });
-    };
 
     return (
-        <Grid
-            container
-            direction="row"
-            justify="center"
-            alignItems="center"
-        >
-            <Grid item xs={6}>
-                <Grid>
-                <form className={classes.container} noValidate autoComplete="off">
+        <Container maxWidth="sm">
+            <form className={classes.form} noValidate autoComplete="off">
+                <Grid
+                    container
+                    spacing={2}
+                >
                     <Grid item xs={6}>
                         <TextField
                             id="first-name"
-                            label="First Name"
-                            style={{ margin: 8 }}
-                            helperText="Full width!"
-                            fullWidth
-                            margin="dense"
+                            className={classes.textField}
+                            type = "text"
                             variant="outlined"
+                            label="First Name"
+                            color="secondary"
+                            fullWidth
+                            required
                         />
                     </Grid>
                     <Grid item xs={6}>
                         <TextField
                             id="last-name"
-                            label="Last Name"
-                            style={{ margin: 8 }}
-                            helperText="Full width!"
-                            fullWidth
-                            margin="dense"
+                            className={classes.textField}
+                            type = "email"
                             variant="outlined"
+                            label="Last Name"
+                            fullWidth
                         />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
                             id="email"
-                            label="Email"
-                            style={{ margin: 8 }}
-                            helperText="Full width!"
-                            fullWidth
-                            margin="dense"
+                            className={classes.textField}
                             variant="outlined"
+                            label="Email"
+                            fullWidth
+                            required
                         />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
                             id="message"
-                            label="Message"
-                            style={{ margin: 8 }}
-                            helperText="Full width!"
-                            fullWidth
-                            margin="dense"
+                            className={classes.textField}
+                            multiline="true"
+                            rows={8}
                             variant="outlined"
+                            label="Message"
+                            fullWidth
+                            required
                         />
                     </Grid>
-                </form>
+                    <Grid item xs={4}>
+                        <Button
+                            // type = "submit"
+                            variant="outlined"
+                            color="primary"
+                            fullWidth="true"
+                            className={classes.button}
+                        >
+                            Submit
+                        </Button>
+                    </Grid>
                 </Grid>
-            </Grid>
-        </Grid>
+            </form>
+        </Container>
     );
 }

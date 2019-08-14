@@ -50,7 +50,7 @@ export default function NavBar() {
           >
             <Grid item xs>
               <Typography color="secondary" variant="h6" className={classes.title}>
-                Rodney Martinez
+              <Link component={NavLink} className={classes.navLink} color="secondary" exact to="/">Rodney Martinez</Link>
               </Typography>
             </Grid>
             <Grid item xs>

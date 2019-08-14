@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { 
   BrowserRouter as Router, 
   Route
@@ -7,12 +7,11 @@ import { Header, Footer } from './layouts';
 import { Home, About, Contact } from './pages';
 import { Container } from '@material-ui/core';
 
-export default class extends Component {
+export default class App extends Component {
 
   render() {
     return (
       <Router>
-        <Fragment>
           <Container>
             <Header />
             <Route exact path="/" component={Home} />
@@ -20,7 +19,6 @@ export default class extends Component {
             <Route path="/contact" component={Contact} />
             <Footer />
           </Container>
-        </Fragment>
       </Router>
     );
   }
