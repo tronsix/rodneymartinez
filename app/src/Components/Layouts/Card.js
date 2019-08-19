@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function RecipeReviewCard() {
+export const ProjectCard = () => {
   const classes = useStyles();
 
   return (

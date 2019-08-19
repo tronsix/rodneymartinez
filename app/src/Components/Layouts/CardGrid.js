@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Grid,
 } from '@material-ui/core';
-import Card from './Card'
+import { ProjectCard } from './Card'
 
 const useStyles = makeStyles(theme => ({
  root:{
@@ -12,11 +13,10 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-export default function CardGrid() {
+export const CardGrid = () => {
   const classes = useStyles();
 
   return (
-    
     <Grid
       container
       spacing={4}
@@ -25,12 +25,16 @@ export default function CardGrid() {
       className={ classes.root }
     >
       <Grid item xs>
-        <Card />
+        <Link to="/projects/project-1">
+          <ProjectCard />
+        </Link>
       </Grid>
       <Grid item xs>
-        <Card />
+        <Link to="/projects/project-2">
+          <ProjectCard />
+        </Link>
       </Grid>
     </Grid>
-
   );
+
 }
