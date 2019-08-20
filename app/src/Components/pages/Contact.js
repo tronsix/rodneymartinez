@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Container } from '@material-ui/core';
-import { ContactForm } from '../layouts';
+import { ContactForm } from '../modules';
 
 export default class Contact extends Component {
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardGrid } from '../layouts/CardGrid';
+import { CardGrid } from '../modules';
 
 export const Home = () => {
     return (

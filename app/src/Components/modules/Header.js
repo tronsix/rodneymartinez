@@ -48,7 +48,7 @@ export const Header = () => {
   return (
 
     <div className={classes.root}>
-      <AppBar elevation="0" position="static" color="background">
+      <AppBar elevation={0} position="static" color="inherit">
         <Toolbar disableGutters={true}>
           <Grid
             container
@@ -58,12 +58,12 @@ export const Header = () => {
           >
             <Grid item xs>
               <Typography color="secondary" variant="h6" className={classes.title}>
-              <StyledLink component={Link} className={classes.titleLink} color="secondary" exact to="/">Rodney Martinez</StyledLink>
+              <StyledLink component={Link} className={classes.titleLink} color="secondary" to="/">Rodney Martinez</StyledLink>
               </Typography>
             </Grid>
             <Grid item xs>
               <div className={classes.nav}>
-                <StyledLink component={NavLink} className={classes.navLink} color="secondary" exact to="/">Work</StyledLink>
+                <StyledLink component={NavLink} className={classes.navLink} color="secondary" to="/">Work</StyledLink>
                 <StyledLink component={NavLink} className={classes.navLink} color="secondary" to="/about">About</StyledLink>
                 <StyledLink component={NavLink} className={classes.navLink} color="secondary" to="/contact">Contact</StyledLink>
               </div>

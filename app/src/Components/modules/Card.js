@@ -35,7 +35,7 @@ export const ProjectCard = () => {
   const classes = useStyles();
 
   return (
-    <Card elevation="0" className={classes.card}>
+    <Card elevation={0} className={classes.card}>
       <CardMedia
         className = {classes.media}
         image = { process.env.PUBLIC_URL + '/assets/Screen_Shot 2019-08-05.png'}

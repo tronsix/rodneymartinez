@@ -19,7 +19,7 @@ export const About = () => {
                 </Typography>
             </Grid>
             <Grid item xs={6}>
-                <Typography color="secondary" variant="body" >
+                <Typography color="secondary" variant="body1" >
                     fd fjjsd;f  js;aldjf l;kjd;fjsl djf;kdsj;fjs;dfkdjf;aldjfl
                     fklsdjf ;lkjds ;alj f;l dj a;fjd ;l s j f ;ajdl ;fjsad l;jflksjad
                     kdjf; lkjsdlk jf;lad js ;l fj.
