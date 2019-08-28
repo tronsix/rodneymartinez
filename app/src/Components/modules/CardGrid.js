@@ -1,40 +1,73 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import {
-  Grid,
+  Grid
 } from '@material-ui/core';
 import { ProjectCard } from './Card'
 
-const useStyles = makeStyles(theme => ({
+// Styles
+const styles = {
  root:{
-  paddingTop: '72px'
+  marginTop: '72px'
  },
+ link:{
+   
+ }
+};
 
-}));
+// Variables
+const indexURL = "/";
+const assetsURL = "/assets/";
+const publicURL = process.env.PUBLIC_URL;
 
-export const CardGrid = () => {
-  const classes = useStyles();
+class CardGrid extends Component {
 
-  return (
-    <Grid
-      container
-      spacing={4}
-      justify="center"
-      alignItems="center"
-      className={ classes.root }
-    >
-      <Grid item xs>
-        <Link to="/projects/project-1">
-          <ProjectCard />
-        </Link>
+  state = {
+    projectCards: [
+      {
+        title: "rd-website",
+        get link() {
+          return indexURL + this.title;
+        },
+        image: publicURL + assetsURL + "project-1.png",
+        copy: "This is project 1"
+      },
+      {
+        title: "rd-onboarding",
+        get link(){
+          return indexURL + this.title;
+        },
+        image: publicURL + assetsURL + "project-1.png",
+        copy: "This is project 2"
+      }
+    ]
+  }
+
+  render () {
+    return (
+      <Grid
+        container
+        spacing={4}
+        justify="center"
+        alignItems="center"
+        className={ this.props.classes.root }
+      >
+          {/* Contact input fields */}
+          {this.state.projectCards.map(card =>
+          <Grid key={card.title} item xs={6}>
+            <Link to={ card.link } >
+              <ProjectCard 
+                title={ card.title }
+                image={ card.image }
+                copy={ card.copy }
+              />
+            </Link>
+          </Grid>
+          )}
       </Grid>
-      <Grid item xs>
-        <Link to="/projects/project-2">
-          <ProjectCard />
-        </Link>
-      </Grid>
-    </Grid>
-  );
-
+    );
+  }
 }
+
+export default withStyles(styles)(CardGrid);

@@ -1,23 +1,31 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { 
   BrowserRouter as Router, 
   Switch,
-  Route
+  Route,
+  Redirect
 } from "react-router-dom";
+import { RDOnboarding, RDWebsite } from './data';
 import { Header, Footer } from './modules';
 import { Home, About, Contact, Projects, NotFound } from './pages';
 import { Container } from '@material-ui/core';
 
-export default class App extends Component {
-
-  render() {
+export const App = () => {
     return (
       <Router>
         <Container>
           <Header />
           <Switch>
             <Route exact path="/" component={ Home } />
-            <Route path="/projects/:projectTitle" component={ Projects } />
+            <Redirect exact path="/projects" to="/" />
+            <Route 
+              path={ "/rd-onboarding" } 
+              render={ () => <Projects data={ RDOnboarding } /> } 
+            />
+            <Route 
+              path={ "/rd-website" } 
+              render={ () => <Projects data={ RDWebsite } /> } 
+            />
             <Route exact path="/about" component={ About } />
             <Route exact path="/contact" component={ Contact } />
             <Route component={ NotFound } />
@@ -26,5 +34,4 @@ export default class App extends Component {
         </Container>
       </Router>
     );
-  }
 }

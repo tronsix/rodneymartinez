@@ -1,35 +1,36 @@
 import React, { Component } from 'react';
-// import { makeStyles } from '@material-ui/core/styles';
-import { Grid, TextField, Button } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+import { Typography, Grid, TextField, Button } from '@material-ui/core';
 
-// const useStyles = makeStyles({
-//     root: {
-//     },
-//     form: {
-//         display: 'flex',
-//         flexWrap: 'wrap',
-//         marginTop: '72px',
-//     },
-//     textField: {
-//         '& fieldset': {
-//             borderRadius: '0',
-//         },
-//     },
-//     button: {
-//         borderRadius: '0',
-//         border: '2px solid',
-//         '&:hover': {
-//             border: '2px solid',
-//         }
-//     },
-// });
+const styles = {
+    root: {
+        marginTop: '72px',
+    },
+    form: {
+        // display: 'flex',
+        // flexWrap: 'wrap',
+        marginTop: '32px',
+    },
+    textField: {
+        '& fieldset': {
+            borderRadius: '0',
+        },
+    },
+    button: {
+        borderRadius: '0',
+        border: '2px solid',
+        '&:hover': {
+            border: '2px solid',
+        }
+    },
+};
 
-export class ContactForm extends Component {
+class ContactForm extends Component {
 
     state = {
         contactInputs: [
             {
-                key: 1,
+                key: "first_name",
                 gridWidth: 6,
                 classes: [],
                 id: "first-name",
@@ -42,7 +43,7 @@ export class ContactForm extends Component {
                 required: true
             },
             {
-                key: 2,
+                key: "last_name",
                 gridWidth: 6,
                 classes: [],
                 id: "last-name",
@@ -55,7 +56,7 @@ export class ContactForm extends Component {
                 required: false
             },
             {
-                key: 3,
+                key: "email",
                 gridWidth: 12,
                 classes: [],
                 id: "email",
@@ -68,7 +69,7 @@ export class ContactForm extends Component {
                 required: true
             },
             {
-                key: 4,
+                key: "message",
                 gridWidth: 12,
                 classes: [],
                 id: "message",
@@ -85,40 +86,50 @@ export class ContactForm extends Component {
 
     render() {
         return (
-            <form>
-                <Grid container spacing={2}>
-                    {/* Contact input fields */}
-                    {this.state.contactInputs.map(input =>
-                        <Grid item
-                            xs={input.gridWidth}
-                            key={input.key.toString()}
-                        >
-                            <TextField
-                                id={input.id}
-                                type={input.type}
-                                variant={input.variant}
-                                label={input.label}
-                                multiline={input.multiline}
-                                rows={input.rows}
-                                fullWidth={input.fullWidth}
-                                required={input.required}
-                            />
-                        </Grid>
-                    )}
-                    <Grid item xs={4}>
-                        <Button
-                            // className={classes.button}
-                            type="submit"
-                            variant="outlined"
-                            color="primary"
-                            fullWidth={true}
-                        >
-                            Submit
+            <div className={ this.props.classes.root }>
+                <Typography color="secondary" variant="h6" >
+                    Howdy friend!
+                </Typography>
+                <Typography color="secondary" variant="body1" >
+                    Have a project idea? Send me a message.
+                </Typography>
+                <form className={this.props.classes.form}>
+                    <Grid container spacing={2}>
+                        {/* Contact input fields */}
+                        {this.state.contactInputs.map(input =>
+                            <Grid item
+                                xs={input.gridWidth}
+                                key={input.key}
+                            >
+                                <TextField
+                                    id={input.id}
+                                    className={this.props.classes.textField}
+                                    type={input.type}
+                                    variant={input.variant}
+                                    label={input.label}
+                                    multiline={input.multiline}
+                                    rows={input.rows}
+                                    fullWidth={input.fullWidth}
+                                    required={input.required}
+                                />
+                            </Grid>
+                        )}
+                        <Grid item xs={4}>
+                            <Button
+                                className={this.props.classes.button}
+                                type="submit"
+                                variant="outlined"
+                                color="primary"
+                                fullWidth={true}
+                            >
+                                Submit
                         </Button>
+                        </Grid>
                     </Grid>
-                </Grid>
-            </form>
+                </form>
+            </div>
         );
     }
 }
 
+export default withStyles(styles)(ContactForm);

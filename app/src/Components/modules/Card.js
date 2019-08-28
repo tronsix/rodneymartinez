@@ -31,19 +31,22 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export const ProjectCard = () => {
+export const ProjectCard = (props) => {
   const classes = useStyles();
 
   return (
-    <Card elevation={0} className={classes.card}>
+    <Card 
+    elevation = { 0 } 
+    className = { classes.card } 
+    >
       <CardMedia
-        className = {classes.media}
-        image = { process.env.PUBLIC_URL + '/assets/Screen_Shot 2019-08-05.png'}
-        title="Paella dish"
+        className = { classes.media }
+        image = { props.image }
+        title = { props.title }
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          This impressive paella is a perfect party dish.
+          { props.copy }
         </Typography>
       </CardContent>
     </Card>

@@ -1,12 +1,12 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink as NavigationLink, Link as RouterLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   AppBar,
   Toolbar,
   Grid,
   Typography,
-  Link as StyledLink
+  Link
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -42,13 +42,16 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const TitleLink = React.forwardRef((props, ref) => <RouterLink innerRef={ref} {...props} />);
+const NavLink = React.forwardRef((props, ref) => <NavigationLink innerRef={ref} {...props} />);
+
 export const Header = () => {
   const classes = useStyles();
 
   return (
 
     <div className={classes.root}>
-      <AppBar elevation={0} position="static" color="inherit">
+      <AppBar id="top" elevation={0} position="static" color="inherit">
         <Toolbar disableGutters={true}>
           <Grid
             container
@@ -58,14 +61,14 @@ export const Header = () => {
           >
             <Grid item xs>
               <Typography color="secondary" variant="h6" className={classes.title}>
-              <StyledLink component={Link} className={classes.titleLink} color="secondary" to="/">Rodney Martinez</StyledLink>
+              <Link component={TitleLink} className={classes.titleLink} color="secondary" to="/">Rodney Martinez</Link>
               </Typography>
             </Grid>
             <Grid item xs>
               <div className={classes.nav}>
-                <StyledLink component={NavLink} className={classes.navLink} color="secondary" to="/">Work</StyledLink>
-                <StyledLink component={NavLink} className={classes.navLink} color="secondary" to="/about">About</StyledLink>
-                <StyledLink component={NavLink} className={classes.navLink} color="secondary" to="/contact">Contact</StyledLink>
+                <Link component={NavLink} className={classes.navLink} color="secondary" exact to="/">Work</Link>
+                <Link component={NavLink} className={classes.navLink} color="secondary" to="/about">About</Link>
+                <Link component={NavLink} className={classes.navLink} color="secondary" to="/contact">Contact</Link>
               </div>
             </Grid>
           </Grid>
