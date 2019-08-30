@@ -93,7 +93,7 @@ class ContactForm extends Component {
                 <Typography color="secondary" variant="body1" >
                     Have a project idea? Send me a message.
                 </Typography>
-                <form className={this.props.classes.form}>
+                <form name="contact" method="POST" data-netlify="true" className={this.props.classes.form}>
                     <Grid container spacing={2}>
                         {/* Contact input fields */}
                         {this.state.contactInputs.map(input =>
