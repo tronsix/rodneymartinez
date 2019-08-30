@@ -1,6 +1,5 @@
-import { RDOnboarding } from './RDOnboarding'
-import { RDWebsite } from './RDWebsite'
+import { Projects } from './Projects'
 
 export {
-    RDOnboarding, RDWebsite
+    Projects
 }

@@ -33,19 +33,19 @@ const usestyles = makeStyles(theme => ({
 export const Projects = (props) => {
     const classes = usestyles();
 
-    function GetElementType(tile) {
-        if (tile.elementType === 'image'){
+    function GetElementType(elementType, imageSrc, imageAlt, heading, body) {
+        if (elementType === 'image'){
             return(
-                <img src={tile.imageSrc} alt={tile.imageAlt} className={classes.image}/>
+                <img src={imageSrc} alt={imageAlt} className={classes.image}/>
             );
-        } else if (tile.elementType ==='copy'){
+        } else if (elementType ==='copy'){
             return(
                 <Fragment>
-                    <Typography variant="h6">{tile.heading}</Typography>
-                    <Typography variant="body1">{tile.body}</Typography>
+                    <Typography variant="h6">{heading}</Typography>
+                    <Typography variant="body1">{body}</Typography>
                 </Fragment>
             );
-        } else if (tile.elementType === 'space'){
+        } else if (elementType === 'space'){
             return(
                 <div className={classes.placeholder}></div>
             );
@@ -56,14 +56,6 @@ export const Projects = (props) => {
         }
     }
 
-    let gridTiles = props.data.map((tile) => {
-        return (
-            <GridListTile key={tile.key} cols={tile.cols || 1}>
-                {GetElementType(tile)}
-            </GridListTile>
-        )
-    });
-
     return (
         <div className={classes.root}>
             <GridList
@@ -72,7 +64,12 @@ export const Projects = (props) => {
                 spacing={32}
                 cols={6}
             >
-                {gridTiles}
+                {props.data.map(({elementType, cols, imageSrc, imageAlt, heading, body}, i) => (
+                    <GridListTile key={i} cols={cols}>
+                        {GetElementType(elementType, imageSrc, imageAlt, heading, body)}
+                    </GridListTile>
+                ))
+                }
             </GridList>
             <Button className={classes.button}>Back to Top</Button>
         </div>
