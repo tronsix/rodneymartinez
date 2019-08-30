@@ -5,9 +5,9 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-import { Projects as ProjectData } from './data';
-import { Header, Footer } from './modules';
-import { Home, About, Contact, Projects, NotFound } from './pages';
+import { Projects as ProjectData } from './components/data';
+import { Header, Footer } from './components/modules';
+import { Home, About, Contact, Projects, NotFound } from './components/pages';
 import { Container } from '@material-ui/core';
 
 export const App = () => {
