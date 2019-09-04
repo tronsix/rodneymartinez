@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Grid, TextField, Button } from '@material-ui/core';
 
-const styles = {
+const useStyles = makeStyles(theme => ({
     root: {
         marginTop: '72px',
     },
@@ -16,25 +16,34 @@ const styles = {
             borderRadius: '0',
         },
     },
+    hidden: {
+        display: "none",
+    },
     button: {
         borderRadius: '0',
         border: '2px solid',
         '&:hover': {
             border: '2px solid',
         }
-    },
-};
+    }
+}));
 
-class ContactForm extends Component {
+export const ContactForm = () => {
+    const classes = useStyles();
 
-    state = {
-        contactInputs: [
+    let contactInputs = [
             {
-                key: "first_name",
+                gridWidth: 12,
+                type: "hidden",
+                name: "form-name",
+                CSSGrid: [classes.hidden],
+                value: "My Website Form"
+            },
+            {
                 gridWidth: 6,
-                classes: [],
-                id: "first-name",
                 type: "text",
+                name: "first_name",
+                id: "first-name",
                 variant: "outlined",
                 label: "First Name",
                 multiline: false,
@@ -43,11 +52,10 @@ class ContactForm extends Component {
                 required: true
             },
             {
-                key: "last_name",
                 gridWidth: 6,
-                classes: [],
-                id: "last-name",
                 type: "text",
+                name: "last_name",
+                id: "last-name",
                 variant: "outlined",
                 label: "Last Name",
                 multiline: false,
@@ -56,11 +64,10 @@ class ContactForm extends Component {
                 required: false
             },
             {
-                key: "email",
                 gridWidth: 12,
-                classes: [],
-                id: "email",
                 type: "email",
+                name: "email",
+                id: "email",
                 variant: "outlined",
                 label: "Email",
                 multiline: false,
@@ -69,11 +76,10 @@ class ContactForm extends Component {
                 required: true
             },
             {
-                key: "message",
                 gridWidth: 12,
-                classes: [],
-                id: "message",
                 type: "text",
+                name: "message",
+                id: "message",
                 variant: "outlined",
                 label: "Message",
                 multiline: true,
@@ -82,29 +88,30 @@ class ContactForm extends Component {
                 required: true
             }
         ]
-    }
 
-    render() {
         return (
-            <div className={ this.props.classes.root }>
+            <div className={ classes.root }>
                 <Typography color="secondary" variant="h6" >
                     Howdy friend!
                 </Typography>
                 <Typography color="secondary" variant="body1" >
                     Have a project idea? Send me a message.
                 </Typography>
-                <form name="contact" method="POST" data-netlify="true" className={this.props.classes.form}>
+                <form name="My Website Form" method="post" data-netlify="true" className={classes.form}>
                     <Grid container spacing={2}>
                         {/* Contact input fields */}
-                        {this.state.contactInputs.map(input =>
+                        {contactInputs.map((input, i) =>
                             <Grid item
                                 xs={input.gridWidth}
-                                key={input.key}
+                                key={i}
+                                className={input.CSSGrid}
                             >
                                 <TextField
                                     id={input.id}
-                                    className={this.props.classes.textField}
+                                    className={classes.textField}
                                     type={input.type}
+                                    name={input.name}
+                                    value={input.value}
                                     variant={input.variant}
                                     label={input.label}
                                     multiline={input.multiline}
@@ -116,20 +123,18 @@ class ContactForm extends Component {
                         )}
                         <Grid item xs={4}>
                             <Button
-                                className={this.props.classes.button}
+                                className={classes.button}
                                 type="submit"
                                 variant="outlined"
                                 color="primary"
                                 fullWidth={true}
                             >
-                                Submit
-                        </Button>
+                                Send
+                            </Button>
                         </Grid>
                     </Grid>
                 </form>
             </div>
         );
-    }
-}
 
-export default withStyles(styles)(ContactForm);
+}

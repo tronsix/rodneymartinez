@@ -26,7 +26,12 @@
     <title>Rodney's App</title>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <form name="My Website Form" netlify netlify-honeypot="bot-field" hidden>
+      <input type="text" name="first_name" />
+      <input type="text" name="last_name" />
+      <input type="email" name="email" />
+      <input type="text" name="message"></textarea>
+    </form>
     <div id="root"></div>
     <!--
       This HTML file is a template.
