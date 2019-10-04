@@ -1,8 +1,9 @@
 import { Header } from './Header'
 import { Footer } from './Footer'
-import { ProjectCard } from './Card'
+import { ProjectCard } from './ProjectCard'
 import { ContactForm } from './ContactForm'
+import { AlertDialog } from './AlertDialog'
 
 export {
-    Header, Footer, ProjectCard, ContactForm
+    Header, Footer, ProjectCard, ContactForm, AlertDialog
 }

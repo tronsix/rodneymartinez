@@ -9,9 +9,6 @@ const useStyles = makeStyles( theme => ({
     root:{
         marginTop: '72px'
     },
-    link:{
-        
-    }
 }));
 
 export const Home = (props) => {
@@ -27,7 +24,7 @@ export const Home = (props) => {
         >
             {/* Contact input fields */}
             {props.data.map(({title, link, mainImage}, i) => (
-                <Grid key={i} item xs={12} sm={6}>
+                <Grid key={i} item xs={12} sm={12} md={6}>
                 <Link to={ link } >
                   <ProjectCard 
                     title={ title }
