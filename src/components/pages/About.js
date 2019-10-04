@@ -46,13 +46,13 @@ export const About = () => {
 
     return (
         <Grid container spacing={4} className={classes.root}>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={4} md={6}>
                 <img
                     src={publicURL + assetsURL + "bio-pic.jpg"}
                     alt="Rodney"
                     className={classes.bioPic} />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={12} sm={8} md={6}>
                 <Typography color="secondary" variant="h6" >
                     About Me
                 </Typography>

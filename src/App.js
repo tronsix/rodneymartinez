@@ -22,11 +22,11 @@ export const App = () => {
             />
             <Redirect exact path="/projects" to="/" />
             <Route 
-              path={ "/rd-onboarding" } 
+              path={ ProjectData[0].link } 
               render={ () => <Projects data={ ProjectData[0].gridTiles } /> } 
             />
             <Route 
-              path={ "/rd-website" } 
+              path={ ProjectData[1].link } 
               render={ () => <Projects data={ ProjectData[1].gridTiles } /> } 
             />
             <Route exact path="/about" component={ About } />
