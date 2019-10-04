@@ -27,7 +27,7 @@ export const Home = (props) => {
         >
             {/* Contact input fields */}
             {props.data.map(({title, link, mainImage}, i) => (
-                <Grid key={i} item xs={6}>
+                <Grid key={i} item xs={12} sm={6}>
                 <Link to={ link } >
                   <ProjectCard 
                     title={ title }
