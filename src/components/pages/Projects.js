@@ -9,39 +9,14 @@ const usestyles = makeStyles(theme => ({
         flexWrap: 'wrap',
         justifyContent: 'space-around',
         overflow: 'hidden',
-        marginTop: '72px',
+        marginTop: '56px',
+    },
+    container: {
+        justifyContent: "center",
     },
     gridItem: {
-        width: "100%",
-        height: 350,
-    },
-    image: {
-        width: "100%",
-        height: "100%",
-        objectFit: "cover"
-    },
-    text: {
-        padding: 16,
-    },
-    alignedRight: {
-        textAlign: "right",
-        marginRight: "8.3333%",
-        [theme.breakpoints.down('sm')]: {
-            marginRight: 0,
-            margin: "0 auto",
-        },
-    },
-    alignedLeft: {
-        textAlign: "left",
-        marginLeft: "8.3333%",
-        [theme.breakpoints.down('sm')]: {
-            marginLeft: 0,
-            margin: "0 auto",
-        },
-    },
-    alignedCenter: {
-        textAlign: "center",
-        margin: "0 auto",
+        maxWidth: 480,
+        maxHeight: "auto",
     },
     placeholder: {
         backgroundColor: "#efefef",
@@ -50,34 +25,35 @@ const usestyles = makeStyles(theme => ({
     },
     button: {
         margin: "48px 0 96px",
+        borderRadius: '0',
+        border: '2px solid',
+        '&:hover': {
+            border: '2px solid',
+        }
     },
 }));
+
+const scrollTop = () => {
+// temporary fix for scroll top not supported on 
+// edge, explorer, and mobile safari
+    window.scrollTo(0,0);
+}
 
 export const Projects = (props) => {
     const classes = usestyles();
 
-    function GetElementType(elementType, imageSrc, imageAlt,copy, align) {
+    function GetElementType(elementType, image, copy) {
         if (elementType === 'image') {
             return (
-                <img src={imageSrc} alt={imageAlt} className={classes.image} />
+                <Fragment>{image.wrapper}</Fragment>
             );
         } else if (elementType === 'copy') {
-            if (align === 'left') {
-                return (
-                    <Fragment>{copy.wrapper}</Fragment>
-                );
-            } else if (align === 'right') {
-                return (
-                    <Fragment>{copy.wrapper}</Fragment>
-                );
-            } else if (align === 'center') {
-                return (
-                    <Fragment>{copy.wrapper}</Fragment>
-                );
-            }     
+            return (
+                <Fragment>{copy.wrapper}</Fragment>
+            );
         } else if (elementType === 'space') {
                 return (
-                    <div className={classes.placeholder}></div>
+                    <div className={`${classes.placeholder} space`}></div>
                 );
             } else {
                 return (
@@ -88,20 +64,29 @@ export const Projects = (props) => {
 
         return (
             <div className={classes.root}>
-                <Grid container spacing={2}>
-                    {props.data.map(({ elementType, cols, imageSrc, imageAlt, copy, align }, i) => (
+                <Grid container className={classes.container} spacing={2}>
+                    {props.data.map(({ elementType, cols, image, copy }, i) => (
                         <Grid item
                             className={classes.gridItem}
                             xs={cols.xs}
+                            sm={cols.sm}
                             md={cols.md}
+                            lg={cols.lg}
                             key={i}
                         >
-                            {GetElementType(elementType, imageSrc, imageAlt, copy, align)}
+                            {GetElementType(elementType, image, copy)}
                         </Grid>
                     ))
                     }
                 </Grid>
-                <Button className={classes.button}>Back to Top</Button>
+                <Button 
+                    className={classes.button} 
+                    onClick={scrollTop}
+                    color="primary"
+                    variant="outlined"
+                >
+                    Back to Top
+                </Button>
             </div>
         );
 
