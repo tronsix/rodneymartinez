@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import { CopyWrapper } from './CopyWrapper';
 import { ImgWrapper } from './ImgWrapper';
-import { getLink } from '../utils'
+import { getLink } from '../functions'
 
 // Variables
 const assetsURL = process.env.PUBLIC_URL + "/assets";

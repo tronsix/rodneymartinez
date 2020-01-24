@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export const ContactForm = () => {
+export default function ContactForm() {
     const classes = useStyles();
 
     let contactInputs = [

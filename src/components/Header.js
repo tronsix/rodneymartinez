@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 700,
     textDecoration: 'none',
     '&:hover': {
-      color: 'grey',
+      color: '#00000025',
       textDecoration: 'none',
     },
   },
@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
       boxShadow: '0 3px 0 0 red'
     },
     '&:hover': {
-      color: 'grey',
+      color: '#00000025',
       textDecoration: 'none',
       boxShadow: '0 3px 0 0 red'
     },
@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
 const TitleLink = React.forwardRef((props, ref) => <RouterLink innerRef={ref} {...props} />);
 const NavLink = React.forwardRef((props, ref) => <NavigationLink innerRef={ref} {...props} />);
 
-export const Header = () => {
+export default function Header() {
   const classes = useStyles();
 
   return (
@@ -69,6 +69,7 @@ export const Header = () => {
                 <Link component={NavLink} className={classes.navLink} color="secondary" exact to="/">Work</Link>
                 <Link component={NavLink} className={classes.navLink} color="secondary" to="/about">About</Link>
                 <Link component={NavLink} className={classes.navLink} color="secondary" to="/contact">Contact</Link>
+                <Link component={NavLink} className={classes.navLink} color="secondary" to="/resume">Resume</Link>
               </div>
             </Grid>
           </Grid>
