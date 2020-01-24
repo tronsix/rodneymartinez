@@ -7,12 +7,11 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
+import CloseIconSharp from '@material-ui/icons/Close';
+import IconButton from '@material-ui/core/IconButton';
 
 const useStyles = makeStyles(theme => ({
     root: {
-    },
-    dialogTitle: {
-        marginBottom: 0,
     },
     button: {
         borderRadius: 0,
@@ -22,6 +21,27 @@ const useStyles = makeStyles(theme => ({
         '&:hover': {
             border: '2px solid',
         }
+    },
+    dialogSpacing:{
+        padding: '8px 24px'
+    },
+    dialogTitle: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    dialogHeading: {
+        marginBottom: 0,
+    },
+    closeButton: {
+        position: 'absolute',
+        right: theme.spacing(1),
+        top: theme.spacing(1),
+        color: theme.secondary,
+    },
+    dialogButton: {
+        borderRadius: 0,
+        marginBottom: 12,
     }
 }));
 
@@ -29,7 +49,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export const AlertDialog = (props) => {
+export default function AlertDialog(props) {
 
     const [open, setOpen] = React.useState(false);
 
@@ -61,10 +81,13 @@ export const AlertDialog = (props) => {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title" disableTypography>
-                    <Typography className={classes.dialogTitle} variant="h4">
+                <DialogTitle id="alert-dialog-title" className={classes.dialogTitle} disableTypography>
+                    <Typography className={classes.dialogHeading} variant="h4">
                         Resume coming soon!
                     </Typography>
+                    <IconButton aria-label="close" color="secondary" className={classes.closeButton} onClick={handleClose}>
+                        <CloseIconSharp />
+                    </IconButton>
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">
@@ -72,11 +95,11 @@ export const AlertDialog = (props) => {
                         should be available soon. In the meantime, feel free to contact me to learn more.
                     </DialogContentText>
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="primary">
+                <DialogActions className={classes.dialogSpacing}>
+                    <Button className={classes.dialogButton} onClick={handleClose} color="primary">
                         Close
                     </Button>
-                    <Button onClick={props.handleContact} color="primary">
+                    <Button className={classes.dialogButton} onClick={props.handleContact} color="primary">
                         Contact
                     </Button>
                 </DialogActions>

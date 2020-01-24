@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export const ProjectCard = (props) => {
+export default function ProjectCard(props) {
   const classes = useStyles();
 
   return (
