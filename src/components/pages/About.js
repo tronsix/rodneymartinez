@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Grid, Button, Fab } from '@material-ui/core';
+import { Typography, Grid, Button } from '@material-ui/core';
 import { AlertDialog } from '../modules';
 
 const useStyles = makeStyles( theme => ({
@@ -23,6 +23,7 @@ const useStyles = makeStyles( theme => ({
         width: "20px",
     },
     social: {
+        padding: 0,
         borderRadius: '50%',
         minWidth: 40,
         height: 40,
@@ -110,7 +111,7 @@ export const About = (props) => {
                     <Grid item xs={12} style={{textAlign: 'left'}}>
                         <a href="https://www.linkedin.com/in/rodneyamartinez/" target="_blank" rel="noopener noreferrer">
                             <Button
-                                variant="round"
+                                variant="contained"
                                 size="small"
                                 aria-label="add"
                                 className={classes.social}

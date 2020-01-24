@@ -124,7 +124,7 @@ export const ContactForm = () => {
                                     type={input.type}
                                     name={input.name}
                                     value={input.value}
-                                    variant={input.variant}
+                                    // variant={input.variant}
                                     label={input.label}
                                     multiline={input.multiline}
                                     rows={input.rows}
