@@ -60,7 +60,7 @@ export const Header = () => {
             alignItems="center"
           >
             <Grid item xs>
-              <Typography color="secondary" variant="h6" className={classes.title}>
+              <Typography color="secondary" variant="h4" className={classes.title}>
               <Link component={TitleLink} className={classes.titleLink} color="secondary" to="/">Rodney Martinez</Link>
               </Typography>
             </Grid>

@@ -21,6 +21,7 @@ const useStyles = makeStyles(theme => ({
     },
     button: {
         borderRadius: '0',
+        padding: '8px 20px',
         border: '2px solid',
         '&:hover': {
             border: '2px solid',
@@ -36,7 +37,7 @@ export const ContactForm = () => {
                 gridWidth: 12,
                 type: "hidden",
                 name: "form-name",
-                CSSGrid: [classes.hidden],
+                CSSGrid: classes.hidden,
                 value: "My Website Form"
             },
             {
@@ -65,6 +66,17 @@ export const ContactForm = () => {
             },
             {
                 gridWidth: 12,
+                type: "text",
+                name: "company",
+                id: "company",
+                variant: "outlined",
+                label: "Company",
+                multiline: false,
+                rows: 1,
+                fullWidth: true,
+            },
+            {
+                gridWidth: 12,
                 type: "email",
                 name: "email",
                 id: "email",
@@ -81,7 +93,7 @@ export const ContactForm = () => {
                 name: "message",
                 id: "message",
                 variant: "outlined",
-                label: "Message",
+                label: "Tell me about your company or project",
                 multiline: true,
                 rows: 8,
                 fullWidth: true,
@@ -92,10 +104,10 @@ export const ContactForm = () => {
         return (
             <div className={ classes.root }>
                 <Typography color="secondary" variant="h6" >
-                    Howdy friend!
+                    Let's work together!
                 </Typography>
                 <Typography color="secondary" variant="body1" >
-                    Have a project idea? Send me a message.
+                    Fill out the form.
                 </Typography>
                 <form name="My Website Form" method="post" data-netlify="true" className={classes.form}>
                     <Grid container spacing={2}>
@@ -112,7 +124,7 @@ export const ContactForm = () => {
                                     type={input.type}
                                     name={input.name}
                                     value={input.value}
-                                    variant={input.variant}
+                                    // variant={input.variant}
                                     label={input.label}
                                     multiline={input.multiline}
                                     rows={input.rows}

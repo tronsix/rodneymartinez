@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { GridList, GridListTile, Button, Typography } from '@material-ui/core';
+import { Grid, Button } from '@material-ui/core';
 
 // Styles
 const usestyles = makeStyles(theme => ({
@@ -9,16 +9,14 @@ const usestyles = makeStyles(theme => ({
         flexWrap: 'wrap',
         justifyContent: 'space-around',
         overflow: 'hidden',
-        marginTop: '72px',
+        marginTop: '56px',
     },
-    gridList: {
-        width: "100%",
-        height: "auto",
+    container: {
+        justifyContent: "center",
     },
-    image: {
-        width: "100%",
-        height: "100%",
-        objectFit: "cover"
+    gridItem: {
+        maxWidth: 480,
+        maxHeight: "auto",
     },
     placeholder: {
         backgroundColor: "#efefef",
@@ -27,52 +25,69 @@ const usestyles = makeStyles(theme => ({
     },
     button: {
         margin: "48px 0 96px",
+        borderRadius: '0',
+        border: '2px solid',
+        '&:hover': {
+            border: '2px solid',
+        }
     },
 }));
+
+const scrollTop = () => {
+// temporary fix for scroll top not supported on 
+// edge, explorer, and mobile safari
+    window.scrollTo(0,0);
+}
 
 export const Projects = (props) => {
     const classes = usestyles();
 
-    function GetElementType(elementType, imageSrc, imageAlt, heading, body) {
-        if (elementType === 'image'){
-            return(
-                <img src={imageSrc} alt={imageAlt} className={classes.image}/>
+    function GetElementType(elementType, image, copy) {
+        if (elementType === 'image') {
+            return (
+                <Fragment>{image.wrapper}</Fragment>
             );
-        } else if (elementType ==='copy'){
-            return(
-                <Fragment>
-                    <Typography variant="h6">{heading}</Typography>
-                    <Typography variant="body1">{body}</Typography>
-                </Fragment>
+        } else if (elementType === 'copy') {
+            return (
+                <Fragment>{copy.wrapper}</Fragment>
             );
-        } else if (elementType === 'space'){
-            return(
-                <div className={classes.placeholder}></div>
-            );
-        } else {
-            return(
-                <div> Element to be rendered not defined. </div>
-            );
+        } else if (elementType === 'space') {
+                return (
+                    <div className={`${classes.placeholder} space`}></div>
+                );
+            } else {
+                return (
+                    <div> Element to be rendered not defined. </div>
+                );
+            }
         }
+
+        return (
+            <div className={classes.root}>
+                <Grid container className={classes.container} spacing={2}>
+                    {props.data.map(({ elementType, cols, image, copy }, i) => (
+                        <Grid item
+                            className={classes.gridItem}
+                            xs={cols.xs}
+                            sm={cols.sm}
+                            md={cols.md}
+                            lg={cols.lg}
+                            key={i}
+                        >
+                            {GetElementType(elementType, image, copy)}
+                        </Grid>
+                    ))
+                    }
+                </Grid>
+                <Button 
+                    className={classes.button} 
+                    onClick={scrollTop}
+                    color="primary"
+                    variant="outlined"
+                >
+                    Back to Top
+                </Button>
+            </div>
+        );
+
     }
-
-    return (
-        <div className={classes.root}>
-            <GridList
-                cellHeight={450}
-                className={classes.gridList}
-                spacing={32}
-                cols={6}
-            >
-                {props.data.map(({elementType, cols, imageSrc, imageAlt, heading, body}, i) => (
-                    <GridListTile key={i} cols={cols}>
-                        {GetElementType(elementType, imageSrc, imageAlt, heading, body)}
-                    </GridListTile>
-                ))
-                }
-            </GridList>
-            <Button className={classes.button}>Back to Top</Button>
-        </div>
-    );
-
-}
