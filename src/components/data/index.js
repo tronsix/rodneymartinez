@@ -1,5 +1,5 @@
-import { ProjectsData } from './ProjectsData'
+import { Projects } from './Projects'
 
 export {
-    ProjectsData
+    Projects
 }

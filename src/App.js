@@ -5,7 +5,7 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-import { ProjectsData } from './components/data';
+import { Projects as ProjectData } from './components/data';
 import { Header, Footer } from './components/modules';
 import { Home, About, Contact, Projects, NotFound } from './components/pages';
 import { Container } from '@material-ui/core';
@@ -18,16 +18,16 @@ export const App = () => {
           <Switch>
             <Route 
             exact path="/" 
-            render={ () => <Home data={ ProjectsData }/> } 
+            render={ () => <Home data={ ProjectData }/> } 
             />
             <Redirect exact path="/projects" to="/" />
             <Route 
-              path={ ProjectsData[0].link } 
-              render={ () => <Projects data={ ProjectsData[0].gridTiles } /> } 
+              path={ ProjectData[0].link } 
+              render={ () => <Projects data={ ProjectData[0].gridTiles } /> } 
             />
             <Route 
-              path={ ProjectsData[1].link } 
-              render={ () => <Projects data={ ProjectsData[1].gridTiles } /> } 
+              path={ ProjectData[1].link } 
+              render={ () => <Projects data={ ProjectData[1].gridTiles } /> } 
             />
             <Route exact path="/about" component={ About } />
             <Route exact path="/contact" component={ Contact } />

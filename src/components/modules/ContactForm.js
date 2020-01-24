@@ -21,7 +21,6 @@ const useStyles = makeStyles(theme => ({
     },
     button: {
         borderRadius: '0',
-        padding: '8px 20px',
         border: '2px solid',
         '&:hover': {
             border: '2px solid',
@@ -37,7 +36,7 @@ export const ContactForm = () => {
                 gridWidth: 12,
                 type: "hidden",
                 name: "form-name",
-                CSSGrid: classes.hidden,
+                CSSGrid: [classes.hidden],
                 value: "My Website Form"
             },
             {
@@ -66,17 +65,6 @@ export const ContactForm = () => {
             },
             {
                 gridWidth: 12,
-                type: "text",
-                name: "company",
-                id: "company",
-                variant: "outlined",
-                label: "Company",
-                multiline: false,
-                rows: 1,
-                fullWidth: true,
-            },
-            {
-                gridWidth: 12,
                 type: "email",
                 name: "email",
                 id: "email",
@@ -93,7 +81,7 @@ export const ContactForm = () => {
                 name: "message",
                 id: "message",
                 variant: "outlined",
-                label: "Tell me about your company or project",
+                label: "Message",
                 multiline: true,
                 rows: 8,
                 fullWidth: true,
@@ -104,10 +92,10 @@ export const ContactForm = () => {
         return (
             <div className={ classes.root }>
                 <Typography color="secondary" variant="h6" >
-                    Let's work together!
+                    Howdy friend!
                 </Typography>
                 <Typography color="secondary" variant="body1" >
-                    Fill out the form.
+                    Have a project idea? Send me a message.
                 </Typography>
                 <form name="My Website Form" method="post" data-netlify="true" className={classes.form}>
                     <Grid container spacing={2}>
