@@ -1,4 +1,6 @@
 import React from 'react';
+import { apiPost } from '../functions/api';
+
 import { makeStyles } from '@material-ui/core/styles';
 import { Typography, Grid, TextField, Button } from '@material-ui/core';
 
@@ -29,8 +31,34 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+const initialState = {
+    company: '',
+    email: '',
+    firstName: '',
+    lastName: '',
+    message: '',
+}
+
 export default function ContactForm() {
     const classes = useStyles();
+    const [state, setState] = React.useState(initialState);
+
+    const handleChange = e => {
+        setState({ ...state, [e.target.id]: e.target.value });
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        apiPost('/contact-form', {
+            email: state.email,
+            first_name: state.firstName,
+            last_name: state.lastName,
+            company: state.company,
+            message: state.message,
+        }).then(({ data }) => {
+            console.log(data);
+        });
+    }
 
     let contactInputs = [
             {
@@ -43,26 +71,28 @@ export default function ContactForm() {
             {
                 gridWidth: 6,
                 type: "text",
-                name: "first_name",
-                id: "first-name",
+                name: "first name",
+                id: "firstName",
                 variant: "outlined",
                 label: "First Name",
                 multiline: false,
                 rows: 1,
                 fullWidth: true,
-                required: true
+                required: true,
+                value: state.firstName,
             },
             {
                 gridWidth: 6,
                 type: "text",
-                name: "last_name",
-                id: "last-name",
+                name: "last name",
+                id: "lastName",
                 variant: "outlined",
                 label: "Last Name",
                 multiline: false,
                 rows: 1,
                 fullWidth: true,
-                required: false
+                required: false,
+                value: state.lastName,
             },
             {
                 gridWidth: 12,
@@ -74,6 +104,7 @@ export default function ContactForm() {
                 multiline: false,
                 rows: 1,
                 fullWidth: true,
+                value: state.company,
             },
             {
                 gridWidth: 12,
@@ -85,7 +116,8 @@ export default function ContactForm() {
                 multiline: false,
                 rows: 1,
                 fullWidth: true,
-                required: true
+                required: true,
+                value: state.email,
             },
             {
                 gridWidth: 12,
@@ -97,7 +129,8 @@ export default function ContactForm() {
                 multiline: true,
                 rows: 8,
                 fullWidth: true,
-                required: true
+                required: true,
+                value: state.message,
             }
         ]
 
@@ -109,7 +142,7 @@ export default function ContactForm() {
                 <Typography color="secondary" variant="body1" >
                     Fill out the form.
                 </Typography>
-                <form name="My Website Form" method="post" data-netlify="true" className={classes.form}>
+                <form name="My Website Form" className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
                         {/* Contact input fields */}
                         {contactInputs.map((input, i) =>
@@ -119,17 +152,18 @@ export default function ContactForm() {
                                 className={input.CSSGrid}
                             >
                                 <TextField
-                                    id={input.id}
                                     className={classes.textField}
-                                    type={input.type}
-                                    name={input.name}
-                                    value={input.value}
-                                    // variant={input.variant}
+                                    fullWidth={input.fullWidth}
+                                    id={input.id}
                                     label={input.label}
                                     multiline={input.multiline}
+                                    name={input.name}
+                                    onChange={handleChange}
                                     rows={input.rows}
-                                    fullWidth={input.fullWidth}
                                     required={input.required}
+                                    type={input.type}
+                                    value={input.value}
+                                    // variant={input.variant}
                                 />
                             </Grid>
                         )}
