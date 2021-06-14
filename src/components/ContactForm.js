@@ -1,16 +1,17 @@
 import React from 'react';
 import { apiPost } from '../functions/api';
+import { Data as ContactFields } from '../data/ContactForm';
+
+import { Typography, Grid, TextField, Button } from '@material-ui/core';
+import Alert from './Alert';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Grid, TextField, Button } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {
         marginTop: '72px',
     },
     form: {
-        // display: 'flex',
-        // flexWrap: 'wrap',
         marginTop: '32px',
     },
     textField: {
@@ -32,6 +33,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const initialState = {
+    alertDisabled: true,
+    alertMessage: '',
+    alertStatus: '',
     company: '',
     email: '',
     firstName: '',
@@ -46,6 +50,9 @@ export default function ContactForm() {
     const handleChange = e => {
         setState({ ...state, [e.target.id]: e.target.value });
     }
+    const alertClose = () => {
+        setState({ ...state, alertDisabled: true });
+    }
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -57,113 +64,38 @@ export default function ContactForm() {
             message: state.message,
         }).then(({ data }) => {
             console.log(data);
+            setState({ ...state, alertDisabled: false, alertMessage: data.message, alertStatus: 'success' });
         });
     }
 
-    let contactInputs = [
-            {
-                gridWidth: 12,
-                type: "hidden",
-                name: "form-name",
-                CSSGrid: classes.hidden,
-                value: "My Website Form"
-            },
-            {
-                gridWidth: 6,
-                type: "text",
-                name: "first name",
-                id: "firstName",
-                variant: "outlined",
-                label: "First Name",
-                multiline: false,
-                rows: 1,
-                fullWidth: true,
-                required: true,
-                value: state.firstName,
-            },
-            {
-                gridWidth: 6,
-                type: "text",
-                name: "last name",
-                id: "lastName",
-                variant: "outlined",
-                label: "Last Name",
-                multiline: false,
-                rows: 1,
-                fullWidth: true,
-                required: false,
-                value: state.lastName,
-            },
-            {
-                gridWidth: 12,
-                type: "text",
-                name: "company",
-                id: "company",
-                variant: "outlined",
-                label: "Company",
-                multiline: false,
-                rows: 1,
-                fullWidth: true,
-                value: state.company,
-            },
-            {
-                gridWidth: 12,
-                type: "email",
-                name: "email",
-                id: "email",
-                variant: "outlined",
-                label: "Email",
-                multiline: false,
-                rows: 1,
-                fullWidth: true,
-                required: true,
-                value: state.email,
-            },
-            {
-                gridWidth: 12,
-                type: "text",
-                name: "message",
-                id: "message",
-                variant: "outlined",
-                label: "Tell me about your company or project",
-                multiline: true,
-                rows: 8,
-                fullWidth: true,
-                required: true,
-                value: state.message,
-            }
-        ]
-
         return (
             <div className={ classes.root }>
+                <Alert alertClose={alertClose} disabled={state.alertDisabled} message={state.alertMessage} status={state.alertStatus} />
                 <Typography color="secondary" variant="h6" >
                     Let's work together!
                 </Typography>
                 <Typography color="secondary" variant="body1" >
-                    Fill out the form.
+                    Tell me a little more about yourself and your project.
                 </Typography>
                 <form name="My Website Form" className={classes.form} onSubmit={handleSubmit}>
                     <Grid container spacing={2}>
-                        {/* Contact input fields */}
-                        {contactInputs.map((input, i) =>
+                        {ContactFields.map(({ gridWidth, id, label, multiline, name, rows, required, type }, i) =>
                             <Grid item
-                                xs={input.gridWidth}
+                                xs={gridWidth ? gridWidth : 12}
                                 key={i}
-                                className={input.CSSGrid}
                             >
                                 <TextField
                                     className={classes.textField}
-                                    fullWidth={input.fullWidth}
-                                    id={input.id}
-                                    label={input.label}
-                                    multiline={input.multiline}
-                                    name={input.name}
+                                    fullWidth
+                                    id={id}
+                                    label={label}
+                                    multiline={multiline}
+                                    name={name}
                                     onChange={handleChange}
-                                    rows={input.rows}
-                                    required={input.required}
-                                    type={input.type}
-                                    value={input.value}
-                                    // variant={input.variant}
+                                    rows={rows}
+                                    required={required}
+                                    type={type}
+                                    value={state[id]}
                                 />
                             </Grid>
                         )}
