@@ -1,13 +1,15 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Grid, Button } from "@material-ui/core";
-import { Layout } from "../components";
+import React from "react"
+import { gql } from 'graphql-request'
+import { Query } from '../graphql/GraphCMS'
+import Markdown from '../components/Markdown'
+
+import { Layout } from "../components"
+import { Typography, Grid, Button } from "@material-ui/core"
+
+import { makeStyles } from "@material-ui/core/styles"
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    marginTop: "72px",
-  },
+  root: {},
   bioPic: {
     width: "100%",
     paddingBottom: 20,
@@ -37,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     fill: theme.palette.background.default,
   },
   button: {
-    margin: "48px 0 48px",
+    margin: "28px 0",
     borderRadius: "0",
     border: "2px solid",
     "&:hover": {
@@ -46,38 +48,53 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const scrollTop = () => {
-  // temporary fix for scroll top not supported on
-  // edge, explorer, and mobile safari
-  window.scrollTo(0, 0);
-};
-
 export default function About(props) {
-  const history = useHistory();
-  const publicURL = process.env.PUBLIC_URL,
-    assetsURL = "/assets/about/",
-    classes = useStyles();
+  const classes = useStyles();
+  const [state, setState] = React.useState({Bio: null});
+  const name = 'Rodney Martinez';
+  const { Bio } = state;
+
+  const bioQuery = gql `
+    query getBio($name: String!) {
+      authors(where: {name: $name}){
+        bio {
+          markdown
+        }
+        picture {
+          url
+        }
+        title
+      }
+    }
+  `
 
   const handleResume = () => {
-    history.push("/resume");
+    props.history.push("/resume");
   };
 
+  React.useEffect(() => {
+    !Bio?.name && 
+      Query(bioQuery, {name}).then(({ authors }) => {
+        setState({Bio: {...authors[0], name }});
+      })
+  }, [bioQuery, name, Bio?.name]);
+
   return (
-    <Layout>
-      <Grid container spacing={4} className={classes.root}>
+    <Layout scroll={false}>
+      {Bio && 
+        <Grid container spacing={4} className={classes.root}>
         <Grid item xs={12} sm={4} md={3}>
           <Grid container>
             <Grid item xs={12}>
               <img
-                src={publicURL + assetsURL + "bio-pic.jpg"}
-                alt="Rodney"
+                src={Bio.picture.url}
+                alt="Rodney Martinez"
                 className={classes.bioPic}
               />
             </Grid>
             <Grid item xs={12}>
-              <Typography color="secondary" variant="h6">
-                Education
-              </Typography>
+              <Typography children={Bio.title} color="secondary" variant="h6" />
+              <Typography children="Education" color="secondary" variant="subtitle1" />
               <Typography color="secondary" variant="body2">
                 <strong>BFA – Film Production</strong>
                 <br />
@@ -92,44 +109,7 @@ export default function About(props) {
           </Grid>
         </Grid>
         <Grid item xs={12} sm={8} md={9}>
-          <Typography color="secondary" variant="h6">
-            About Me
-          </Typography>
-          <Typography color="secondary" variant="body2">
-            I’m a UX Designer with expertise in web/graphic design, front-end
-            web development, and video/animation production. I currently work at
-            Rocket Dollar, a fintech company based in Austin, Texas.
-            <br />
-            <br />
-            Rocket Dollar builds streamlined processes for opening and
-            administrating self-directed retirement accounts, along with
-            investment management tools to help investors track the performance
-            of their assets.
-            <br />
-            <br />
-            At Rocket Dollar, I’ve been responsible for developing our brand
-            along with the design system that accompanies it. Along with
-            branding, I designed and developed our website, and have worked with
-            our talented development team to design and develop our application.
-            Lastly, I’ve worked with our executive and sales and marketing teams
-            to craft some of our presentations, marketing materials, and videos.
-            <br />
-            <br />
-            {/* My tenor at Rocket Dollar has been a humbling experience, I’m surrounded by some of the most talented people 
-                    I’ve had the pleasure to work with. I can say I’m most proud of being able to watch our brand grow and influence 
-                    the rest of the industry. The single best moment I’ve had has been watching our team win second place 
-                    at the Money 2020 Startup Pitch in 2018, and knowing I contributed to the presentation that got us there. 
-                    <br /><br /> */}
-            Before Rocket Dollar, I was the Director of Account Management at
-            BlueCheck, a digital age and identity verification company, the
-            Community Development Manager at Candid.ly now Candidly.com, and a
-            Techstars Associate at Techstars Austin.
-            <br />
-            <br />
-            Outside of work you can find me cooking gourmet meals in my kitchen,
-            practicing yoga, paddle boarding on Lake Austin, or spoiling my dog
-            Bean.
-          </Typography>
+          <Markdown children={Bio.bio.markdown} />
           <Grid item xs={6}>
             <Button color="primary" className={classes.button} onClick={handleResume} variant="outlined">
               View Resume
@@ -172,18 +152,9 @@ export default function About(props) {
               </a>
             </Grid>
           </Grid>
-          <Grid container style={{ justifyContent: "center" }}>
-            <Button
-              className={classes.button}
-              onClick={scrollTop}
-              color="primary"
-              variant="outlined"
-            >
-              Back to Top
-            </Button>
-          </Grid>
         </Grid>
       </Grid>
+      }
     </Layout>
   );
 }
