@@ -12,6 +12,7 @@ import {
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    marginBottom: 72,
   },
   title: {
     flexGrow: 1,

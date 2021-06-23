@@ -16,7 +16,6 @@ const useStyles = makeStyles(() => ({
     backgroundRepeat: 'no-repeat',
     minHeight: 792,
     width: '100%',
-    marginTop: 40,
   },
 }));
 

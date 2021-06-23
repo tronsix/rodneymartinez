@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { ProjectsData } from '../data';
 
 export const AppContext = React.createContext();
 
@@ -16,7 +15,7 @@ export const AppContext = React.createContext();
 //   }
 
   export default function Context(props) {
-    const [appState, setAppState] = useState(ProjectsData);
+    const [appState, setAppState] = useState(null);
     const context = React.useMemo(() => ({appState, setAppState}), [appState, setAppState]);
 
     return (
