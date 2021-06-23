@@ -5,7 +5,7 @@ import { Layout } from '../components';
 export default function NotFound() {
 
     return(
-        <Layout>
+        <Layout scroll={false}>
             <h2>404 Not Found</h2>
         </Layout>
     );

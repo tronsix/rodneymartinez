@@ -4,7 +4,7 @@ import { ContactForm, Layout } from "../components";
 
 export default function Contact() {
   return (
-    <Layout>
+    <Layout scroll={false}>
       <Container maxWidth="sm">
         <ContactForm />
       </Container>{" "}
